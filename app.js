@@ -60,7 +60,10 @@ app.get("/", function (req, res) {
     else {
       res.render("list", { listTitle: "Today", newListItems: data });
     }
-  })
+  }).catch((error) => {
+  assert.isNotOk(error,'Promise error');
+  done();
+})
 });
 
 
