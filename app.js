@@ -11,7 +11,11 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect('mongodb://127.0.0.1:27017/todolistDB');
+mongoose.connect('mongodb+srv://Vineet:krvineet@cluster0.etfbocx.mongodb.net/todolistDB').then(()=>{
+  console.log('sucessfully connect');
+}).catch((err)=>{
+   console.log("Database is not connect" + err);
+});
 
 const todolistSchema = {
   name: String
@@ -51,7 +55,7 @@ app.get("/", function (req, res) {
   items.find().then((data) => {
     if (data.length == 0) {
       items.insertMany(defaultItem).then(function () {
-        
+        console.log("insert");
       }).catch((err) => {
         console.log(err);
       })
